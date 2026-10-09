@@ -236,6 +236,13 @@ header.solid{background:rgba(255,255,255,.95);box-shadow:0 2px 16px rgba(15,23,4
 .svc .mark{outline-color:#ff6b6b}
 .svc .chat .m1{background:#5b5bf0}
 .svc .chat .m2{background:rgba(255,255,255,.92)}
+
+.scene3{height:190px;background:linear-gradient(180deg,#f3f4ff,#eef9f6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:18px}
+.scene3 img{height:120px;width:auto;max-width:85%}
+.tag3{font-size:13px;font-weight:700;color:var(--accent);background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 14px}
+.svc .vis.vis2{background:linear-gradient(180deg,#f3f4ff,#eef9f6);padding:20px}
+.vis2 img{height:130px;width:auto;max-width:88%}
+.svc.wide .vis.vis2 img{height:140px}
 </style>
 </head>
 <body>
@@ -275,7 +282,7 @@ header.solid{background:rgba(255,255,255,.95);box-shadow:0 2px 16px rgba(15,23,4
     <p class="lead">手間のかかる作業を引き受け、本業に使える時間を増やします。</p>
     <div class="grid3">
 <div class="card worry">
-  <div class="scene2"><span class="ic2"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="11"/><path d="M28 28l10 10"/><path d="M15 20h10M20 15v10"/></svg></span><span class="tag2">見込み客が足りない</span></div>
+  <div class="scene3"><img src="img/searching_pqji.svg" alt="" loading="lazy"><span class="tag3">見込み客が足りない</span></div>
   <h3>営業リスト作成</h3>
   <div class="cmp">
     <div class="row"><span>社内で対応</span><div class="bar"><u class="b" style="width:100%"></u></div><b>約20時間</b></div>
@@ -283,7 +290,7 @@ header.solid{background:rgba(255,255,255,.95);box-shadow:0 2px 16px rgba(15,23,4
   </div>
   <p class="cn">例：企業100社を条件に合わせて探し、連絡先まで調べる場合</p>
 </div><div class="card worry">
-  <div class="scene2"><span class="ic2"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="15"/><path d="M24 15v9l6 4"/></svg></span><span class="tag2">作業に時間を取られる</span></div>
+  <div class="scene3"><img src="img/time-management_4ss6.svg" alt="" loading="lazy"><span class="tag3">作業に時間を取られる</span></div>
   <h3>データ収集・整備</h3>
   <div class="cmp">
     <div class="row"><span>社内で対応</span><div class="bar"><u class="b" style="width:100%"></u></div><b>約12時間</b></div>
@@ -291,7 +298,7 @@ header.solid{background:rgba(255,255,255,.95);box-shadow:0 2px 16px rgba(15,23,4
   </div>
   <p class="cn">例：Webの情報500件を集めて表にそろえる場合</p>
 </div><div class="card worry">
-  <div class="scene2"><span class="ic2"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 14l12 10 8-6 12 14"/><path d="M40 24v8h-8"/></svg></span><span class="tag2">ページのミスで機会を逃す</span></div>
+  <div class="scene3"><img src="img/web-shopping_xd5k.svg" alt="" loading="lazy"><span class="tag3">ページのミスで機会を逃す</span></div>
   <h3>EC商品ページチェック</h3>
   <div class="cmp">
     <div class="row"><span>社内で対応</span><div class="bar"><u class="b" style="width:100%"></u></div><b>売上が落ちてから気づく</b></div>
@@ -311,38 +318,25 @@ header.solid{background:rgba(255,255,255,.95);box-shadow:0 2px 16px rgba(15,23,4
     <p class="lead">4つの作業を、件数単位でお受けします。</p>
     <div class="grid3">
       <div class="card svc">
-        <div class="vis">
-          <div class="mini"><i></i><b></b><b></b></div>
-          <div class="mini"><i></i><b></b><b></b></div>
-          <div class="mini"><i></i><b></b><b></b></div>
-          <span class="pill">条件で絞り込み</span>
-        </div>
+        <div class="vis vis2"><img src="img/searching-everywhere_tffi.svg" alt="" loading="lazy"></div>
         <h3>営業リスト作成</h3>
         <p>条件に合う企業を集め、連絡先まで確認して納品します。</p>
         <div class="chips"><span>会社名</span><span>URL</span><span>電話</span><span>フォーム</span></div>
       </div>
       <div class="card svc">
-        <div class="vis">
-          <div class="flow"><span>Web</span><em>→</em><span>整理</span><em>→</em><span class="g">表</span></div>
-          <div class="bars"><u style="width:90%"></u><u style="width:65%"></u><u style="width:80%"></u></div>
-        </div>
+        <div class="vis vis2"><img src="img/organizing-data_uns9.svg" alt="" loading="lazy"></div>
         <h3>データ収集・整備</h3>
         <p>Web上の情報を集め、そのまま使える表に整えます。</p>
         <div class="chips"><span>情報収集</span><span>欠損補完</span><span>自動で定期取得</span></div>
       </div>
       <div class="card svc">
-        <div class="vis">
-          <div class="page"><div class="pimg mark" data-n="1"></div><div class="pl"></div><div class="pl s mark" data-n="2"></div></div>
-          <span class="pill r">指摘箇所を明示</span>
-        </div>
+        <div class="vis vis2"><img src="img/online-shopping_hgf6.svg" alt="" loading="lazy"></div>
         <h3>EC商品ページチェック</h3>
         <p>誤字、表記ゆれ、モール間の食い違いを洗い出します。</p>
         <div class="chips"><span>Amazon</span><span>楽天</span><span>Yahoo!</span><span>自社EC</span></div>
       </div>
       <div class="card svc wide">
-        <div class="vis">
-          <div class="chat"><span class="m1">はじめまして。◯◯の件でご連絡しました</span><span class="m2">詳しく聞かせてください</span></div>
-        </div>
+        <div class="vis vis2"><img src="img/message-sent_iyz6.svg" alt="" loading="lazy"></div>
         <div class="wbody">
           <h3>営業代行（メッセージ送信）</h3>
           <p>作ったリストをもとに、問い合わせフォーム・メール・SNSのメッセージで最初のご連絡まで代行します。</p>
