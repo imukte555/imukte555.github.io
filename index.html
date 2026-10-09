@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kasane Works｜営業リスト作成・データ整備・EC商品ページチェック</title>
+<meta name="description" content="営業リストの作成、データの収集・整備、ECの商品ページ品質チェックを、AIと人の確認で速く正確にお届けします。まずは10件の無料サンプルから。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@500;700&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f172a; --sub:#475569; --line:#e5e7f0; --bg:#ffffff; --soft:#f6f7fb;
+  --accent:#5b5bf0; --accent2:#22c3a6; --accent-ink:#ffffff; --accent-soft:#eef0ff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans JP",sans-serif;color:var(--ink);background:var(--bg);line-height:1.85;font-size:16px}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);z-index:10}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:Inter,sans-serif;font-weight:700;font-size:21px;text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo::before{content:"";width:26px;height:26px;border-radius:9px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.logo span{color:var(--accent)}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:14px;font-weight:500}
+.nav ul a{text-decoration:none;color:var(--sub)}
+.nav ul a:hover{color:var(--accent)}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--accent),#7a5af8);color:#fff;text-decoration:none;padding:14px 28px;border-radius:999px;font-weight:700;font-size:15px;box-shadow:0 8px 24px rgba(91,91,240,.3);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:#fff;color:var(--accent);border:1.5px solid var(--accent);box-shadow:none}
+.hero{padding:88px 0 96px;background:radial-gradient(60% 80% at 85% 0%,#d9f7ef 0,transparent 60%),radial-gradient(60% 80% at 0% 10%,#e3e4ff 0,transparent 60%),#fff;overflow:hidden}
+.hero .tag{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 16px;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:24px}
+.hero h1{font-size:46px;line-height:1.35;font-weight:700;margin-bottom:22px;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,#c7f2e7 62%)}
+.hero p{font-size:18px;color:var(--sub);max-width:620px;margin-bottom:34px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+section{padding:88px 0}
+section.alt{background:var(--soft)}
+.eyebrow{font-family:Inter,sans-serif;font-size:13px;font-weight:700;color:var(--accent);letter-spacing:.14em;margin-bottom:8px}
+h2{font-size:32px;font-weight:700;margin-bottom:14px;line-height:1.4}
+.lead{color:var(--sub);margin-bottom:44px;max-width:680px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(15,23,42,.08)}
+.card h3{font-size:19px;margin-bottom:10px}
+.card p{color:var(--sub);font-size:15px}
+.card ul{margin-top:14px;padding-left:1.2em;color:var(--sub);font-size:14px}
+.card li::marker{color:var(--accent2)}
+.num{font-family:Inter,sans-serif;font-size:42px;font-weight:700;line-height:1.2;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat{text-align:center;padding:34px 24px}
+.stat .label{color:var(--sub);font-size:14px;margin-top:8px}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.step{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px}
+.step::before{counter-increment:s;content:counter(s);font-family:Inter,sans-serif;font-weight:700;color:#fff;font-size:15px;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.step h3{font-size:17px;margin-bottom:6px}
+.step p{font-size:14px;color:var(--sub)}
+.why{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.why .card{display:flex;gap:18px;align-items:flex-start}
+.why .ic{flex:0 0 46px;height:46px;border-radius:14px;background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:700;font-family:Inter,sans-serif}
+.contact{text-align:center;background:linear-gradient(135deg,#4f46e5,#7a5af8 55%,#22c3a6);color:#fff}
+.contact .eyebrow{color:#d9f7ef}
+.contact .lead{margin-left:auto;margin-right:auto;color:#e8eaff}
+.contact .btn{background:#fff;color:var(--accent);box-shadow:0 10px 30px rgba(0,0,0,.2)}
+footer{padding:32px 0;color:var(--sub);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+@media (max-width:820px){
+  .hero{padding:56px 0 64px}
+  .hero h1{font-size:30px}
+  .hero p{font-size:16px}
+  .grid3,.steps,.why{grid-template-columns:1fr}
+  .nav ul{display:none}
+  section{padding:60px 0}
+  h2{font-size:26px}
+}
+
+.sample-grid{display:grid;grid-template-columns:1fr;gap:24px}
+.sample{background:#fff;border:1px solid var(--line);border-radius:20px;padding:26px;overflow:hidden}
+.sample h3{font-size:18px;margin-bottom:4px}
+.sample .note{font-size:13px;color:var(--sub);margin-bottom:14px}
+.tbl{overflow:visible}
+td,th{word-break:break-all}
+table{border-collapse:collapse;width:100%;font-size:14px;table-layout:auto}
+th{background:var(--accent-soft);color:var(--accent);text-align:left;padding:8px 10px;font-weight:700}
+td{padding:8px 10px;border-bottom:1px solid var(--line);color:var(--sub)}
+table.grid{border:1.5px solid #94a3b8}
+table.grid th,table.grid td{border:1px solid #94a3b8}
+.ng{color:#d9480f;font-weight:700}
+.ok{color:#12a37f;font-weight:700}
+.badge{display:inline-block;background:#fff4e6;color:#d9480f;border-radius:999px;padding:3px 12px;font-size:12px;font-weight:700;margin-bottom:12px}
+@media (max-width:820px){
+  table,tbody,tr,td{display:block;width:100%}
+  tr:first-child{display:none}
+  tr{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin-bottom:10px}
+  td{border:0;padding:3px 0;word-break:normal}
+  .shot{grid-template-columns:1fr}
+  .shot .img{height:80px}
+}
+
+.shot{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:#fafbff;padding:16px;display:grid;grid-template-columns:110px 1fr;gap:16px;position:relative}
+.shot .img{height:110px;border-radius:10px;background:linear-gradient(135deg,#dfe3ff,#c7f2e7);display:flex;align-items:center;justify-content:center;color:var(--sub);font-size:12px}
+.shot .t{font-size:13px;color:var(--ink);line-height:1.7}
+.shot .t b{display:block;font-size:14px;margin-bottom:4px}
+.mark{outline:2.5px solid #e03131;outline-offset:3px;border-radius:4px;position:relative}
+.mark::after{content:attr(data-n);position:absolute;top:-12px;right:-12px;width:20px;height:20px;border-radius:50%;background:#e03131;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.legend{margin-top:12px;font-size:12px;color:var(--sub)}
+.legend span{color:#e03131;font-weight:700}
+
+.svc{padding:0;overflow:hidden}
+.svc h3,.svc p,.svc .chips{margin-left:26px;margin-right:26px}
+.svc h3{margin-top:20px}
+.svc .chips{margin-bottom:26px;margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.chips span{background:var(--accent-soft);color:var(--accent);font-size:12px;font-weight:700;border-radius:999px;padding:4px 12px}
+.vis{height:170px;background:linear-gradient(135deg,#eef0ff,#dcf7ef);display:flex;align-items:center;justify-content:center;gap:10px;position:relative;flex-wrap:wrap;padding:16px}
+.mini{width:78px;background:#fff;border-radius:10px;padding:10px;box-shadow:0 6px 16px rgba(91,91,240,.15);display:flex;flex-direction:column;gap:6px}
+.mini i{height:22px;border-radius:6px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+.mini b{height:6px;border-radius:3px;background:#dfe3f1}
+.mini b+b{width:60%}
+.pill{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:#fff;color:var(--accent);font-size:12px;font-weight:700;border-radius:999px;padding:4px 14px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.pill.r{color:#e03131}
+.flow{display:flex;align-items:center;gap:8px}
+.flow span{background:#fff;border-radius:12px;padding:12px 14px;font-weight:700;font-size:14px;box-shadow:0 6px 16px rgba(91,91,240,.15)}
+.flow span.g{background:var(--accent2);color:#fff}
+.flow em{font-style:normal;color:var(--accent);font-weight:700}
+.bars{position:absolute;bottom:16px;left:24px;right:24px;display:flex;flex-direction:column;gap:5px}
+.bars u{height:6px;border-radius:3px;background:#fff}
+.page{background:#fff;border-radius:12px;padding:12px;width:190px;box-shadow:0 6px 16px rgba(91,91,240,.15);margin-bottom:18px}
+.pimg{height:48px;border-radius:8px;background:linear-gradient(135deg,#dfe3ff,#c7f2e7);margin-bottom:10px}
+.pl{height:7px;border-radius:3px;background:#dfe3f1;margin-bottom:6px}
+.pl.s{width:55%;margin-bottom:0}
+
+.fmt{margin-top:32px;background:linear-gradient(135deg,#eef0ff,#dcf7ef);border-radius:20px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.fmt b{display:block;font-size:18px}
+.fmt span{font-size:14px;color:var(--sub)}
+.fmt .chips{display:flex;flex-wrap:wrap;gap:8px}
+.fmt .chips span{background:#fff;color:var(--accent)}
+
+.worry{padding:0;overflow:hidden}
+.scene{position:relative;background:linear-gradient(135deg,#fff1f0,#fff8e6);padding:10px 10px 0}
+.ill{width:100%;height:auto;display:block}
+.say{position:absolute;top:14px;right:14px;background:#fff;border-radius:14px;padding:8px 12px;font-size:13px;font-weight:700;line-height:1.5;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.worry h3{margin:18px 24px 12px}
+.cmp{margin:0 24px;display:flex;flex-direction:column;gap:10px}
+.cmp .row{display:grid;grid-template-columns:78px 1fr;gap:4px 10px;align-items:center;font-size:12px;color:var(--sub)}
+.cmp .row b{grid-column:2;font-size:13px;color:var(--ink)}
+.bar{height:12px;background:#eef0f6;border-radius:6px;overflow:hidden}
+.bar u{display:block;height:100%;border-radius:6px}
+.bar .b{background:linear-gradient(90deg,#ff922b,#e03131)}
+.bar .a{background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.worry .cn{margin:14px 24px 24px;font-size:12px}
+.cn.center{text-align:center;margin-top:24px;font-size:12px;color:var(--sub)}
+
+.svc.wide{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
+.svc.wide .vis{height:100%;min-height:170px}
+.wbody{padding:8px 0}
+.wbody h3,.wbody p,.wbody .chips{margin-left:26px;margin-right:26px}
+.wbody h3{margin-top:24px}
+.chat{display:flex;flex-direction:column;gap:10px;width:100%;max-width:260px}
+.chat span{font-size:12px;font-weight:700;padding:9px 14px;border-radius:16px;max-width:90%;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.chat .m1{background:var(--accent);color:#fff;align-self:flex-start;border-bottom-left-radius:4px}
+.chat .m2{background:#fff;color:var(--ink);align-self:flex-end;border-bottom-right-radius:4px}
+@media (max-width:820px){.svc.wide{grid-template-columns:1fr}.svc.wide .vis{height:170px}}
+
+body:not(.scrolled) header{background:transparent;backdrop-filter:none}
+body:not(.scrolled) header .logo,body:not(.scrolled) header .nav ul a{color:#fff}
+body:not(.scrolled) header .logo span{color:#d8b878}
+header{transition:background .3s}
+header.solid{background:rgba(255,255,255,.95);box-shadow:0 2px 16px rgba(15,23,42,.06)}
+.hero2{position:relative;min-height:100vh;margin-top:-68px;padding-top:68px;background:linear-gradient(160deg,#0b1437 0%,#18236b 55%,#2b2f8f 100%);color:#fff;overflow:hidden;display:flex;align-items:center}
+.poly{position:absolute;opacity:.55;mix-blend-mode:screen;will-change:transform}
+.p1{width:520px;height:620px;left:-120px;top:-80px;background:linear-gradient(160deg,#5b5bf0,transparent);clip-path:polygon(20% 0,100% 30%,70% 100%,0 70%);animation:drift 14s ease-in-out infinite alternate}
+.p2{width:420px;height:520px;right:-60px;top:40px;background:linear-gradient(200deg,#22c3a6,transparent);clip-path:polygon(40% 0,100% 20%,80% 100%,0 60%);animation:drift 18s ease-in-out infinite alternate-reverse}
+.p3{width:300px;height:300px;right:22%;bottom:-80px;background:linear-gradient(120deg,#7cc8ff,transparent);clip-path:polygon(50% 0,100% 100%,0 80%);animation:drift 12s ease-in-out infinite alternate}
+.p4{width:240px;height:360px;left:38%;top:-120px;background:linear-gradient(180deg,#c9a76a,transparent);opacity:.35;clip-path:polygon(0 0,100% 10%,60% 100%);animation:drift 20s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{rotate:0deg;translate:0 0}to{rotate:8deg;translate:30px 40px}}
+.hero2-in{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;width:100%}
+.big{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:clamp(44px,7.5vw,112px);line-height:.95;letter-spacing:.06em;display:flex;flex-direction:column}
+.big .ln{display:block;overflow:hidden;white-space:nowrap}
+.big .ln>span{display:inline-block;transform:translateY(110%);opacity:0;animation:up .9s cubic-bezier(.2,.8,.2,1) forwards}
+.big .gold{color:#d8b878}
+@keyframes up{to{transform:none;opacity:1}}
+.hero2-txt{opacity:0;animation:fade 1s 1.4s forwards}
+@keyframes fade{to{opacity:1}}
+.hero2 .jp{font-size:24px;font-weight:700;line-height:1.6;margin-bottom:16px}
+.hero2 .sub{color:#c9cdf0;font-size:15px;margin-bottom:28px}
+.hero2 .cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn.ghost2{background:transparent;border:1.5px solid rgba(255,255,255,.7);color:#fff;box-shadow:none}
+.scroll-cue{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);font-family:Inter,sans-serif;font-size:11px;letter-spacing:.3em;color:#c9cdf0;z-index:2}
+.scroll-cue::after{content:"";display:block;width:1px;height:44px;background:#c9cdf0;margin:10px auto 0;animation:cue 1.8s infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (max-width:820px){.hero2-in{grid-template-columns:1fr}.hero2 .jp{font-size:19px}}
+@media (prefers-reduced-motion:reduce){.poly,.big .ln>span,.hero2-txt{animation:none;opacity:1;transform:none}.rv{opacity:1;transform:none}}
+
+.about{display:grid;grid-template-columns:160px 1fr;background:#fff;border:1px solid var(--line);border-radius:20px;overflow:hidden;max-width:820px}
+.about dt,.about dd{padding:18px 24px;border-bottom:1px solid var(--line)}
+.about dt{font-weight:700;background:var(--accent-soft);color:var(--accent);font-size:14px}
+.about dd{color:var(--sub);font-size:15px}
+.about dt:last-of-type,.about dd:last-of-type{border-bottom:0}
+.tbd{margin-left:10px;font-size:11px;font-weight:700;color:#d9480f;background:#fff4e6;border-radius:999px;padding:2px 10px}
+@media (max-width:820px){.about{grid-template-columns:1fr}.about dt{border-bottom:0;padding-bottom:6px}.about dd{padding-top:6px}}
+
+.cform{max-width:640px;margin:0 auto;text-align:left;background:#fff;color:var(--ink);border-radius:24px;padding:32px;box-shadow:0 20px 50px rgba(0,0,0,.2);display:flex;flex-direction:column;gap:18px}
+.cform label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700}
+.cform b,.cform legend b{margin-left:8px;font-size:11px;color:#fff;background:#e03131;border-radius:4px;padding:1px 6px;vertical-align:1px}
+.cform input:not([type=checkbox]),.cform textarea{font:inherit;font-weight:400;border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;background:#fafbff}
+.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--accent);background:#fff}
+.cform .f2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cform fieldset{border:0;display:flex;flex-wrap:wrap;gap:8px 18px}
+.cform legend{font-size:14px;font-weight:700;margin-bottom:8px;width:100%}
+.cform .ck{flex-direction:row;align-items:center;gap:6px;font-weight:400}
+.cform .btn{align-self:center;border:0;cursor:pointer;background:linear-gradient(135deg,var(--accent),#7a5af8);color:#fff;font:inherit;font-weight:700}
+.fmsg{text-align:center;font-size:14px;min-height:1em}
+@media (max-width:820px){.cform{padding:22px}.cform .f2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Kasane<span>Works</span></a>
+    <ul>
+      <li><a href="#services">サービス</a></li>
+      <li><a href="#results">実績</a></li>
+      <li><a href="#samples">サンプル</a></li>
+      <li><a href="#flow">進め方</a></li>
+      <li><a href="#about">事業者概要</a></li>
+      <li><a href="#contact">お問い合わせ</a></li>
+    </ul>
+  </div>
+</header>
+
+<section class="hero2">
+  <div class="poly p1" data-speed="0.25"></div><div class="poly p2" data-speed="0.12"></div>
+  <div class="poly p3" data-speed="0.35"></div><div class="poly p4" data-speed="0.18"></div>
+  <div class="wrap hero2-in">
+    <h1 class="big" aria-label="LIGHTEN YOUR WORK"><span class="ln">LIGHTEN</span><span class="ln">YOUR</span><span class="ln gold">WORK</span></h1>
+    <div class="hero2-txt">
+      <p class="jp">営業リストも、商品ページの確認も。<br>面倒な作業は、まるごとお任せ。</p>
+      <p class="sub">企業リストの作成、データの収集・整備、ECの商品ページ品質チェック、メッセージでの営業代行を、AIと人の目の二重確認で速く正確に仕上げます。</p>
+      <div class="cta"><a class="btn" href="#contact">無料サンプルを依頼する</a><a class="btn ghost2" href="#services">サービスを見る</a></div>
+    </div>
+  </div>
+  <div class="scroll-cue">SCROLL</div>
+</section>
+
+<section id="worries" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">PROBLEMS</div>
+    <h2>こんなお悩み、ありませんか？</h2>
+    <p class="lead">時間のかかる作業は、任せるだけで本業に時間が戻ります。</p>
+    <div class="grid3">
+<div class="card worry">
+  <div class="scene"><svg viewBox="0 0 240 150" class="ill" aria-hidden="true">
+<rect x="14" y="116" width="212" height="8" rx="4" fill="#cfd4ea"/>
+<rect x="30" y="66" width="70" height="50" rx="6" fill="#fff" stroke="#b9bfe0" stroke-width="2"/>
+<rect x="38" y="76" width="54" height="6" rx="3" fill="#dfe3f1"/><rect x="38" y="88" width="54" height="6" rx="3" fill="#dfe3f1"/><rect x="38" y="100" width="54" height="6" rx="3" fill="#dfe3f1"/>
+<text x="44" y="60" font-size="15" fill="#e03131" font-weight="700">0件…</text>
+<rect x="132" y="86" width="52" height="32" rx="14" fill="#12a37f"/>
+<circle cx="158" cy="68" r="19" fill="#ffd9b8"/>
+<path d="M138 66c-4-26 44-26 40 0c-3-8-8-12-20-12s-17 4-20 12z" fill="#7a3b1e"/>
+<path d="M139 66v22M177 66v22" stroke="#7a3b1e" stroke-width="7" stroke-linecap="round"/>
+<path d="M146 90l8-14M170 90l-8-14" stroke="#12a37f" stroke-width="9" stroke-linecap="round"/>
+<circle cx="153" cy="74" r="6" fill="#ffd9b8"/><circle cx="163" cy="74" r="6" fill="#ffd9b8"/>
+<path d="M150 70q3 2 6 0M160 70q3 2 6 0" stroke="#3b3f63" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M196 30q4 8 0 12q-4-4 0-12z" fill="#7cc8ff"/>
+</svg><div class="say">顧客集め、<br>大変だな…</div></div>
+  <h3>営業リスト作りに追われる</h3>
+  <div class="cmp">
+    <div class="row"><span>自分でやると</span><div class="bar"><u class="b" style="width:100%"></u></div><b>約20時間</b></div>
+    <div class="row"><span>お任せすると</span><div class="bar"><u class="a" style="width:8%"></u></div><b>確認のみ 約1時間</b></div>
+  </div>
+  <p class="cn">例：企業100社を条件に合わせて探し、連絡先まで調べる場合</p>
+</div><div class="card worry">
+  <div class="scene"><svg viewBox="0 0 240 150" class="ill" aria-hidden="true">
+<rect x="14" y="128" width="212" height="8" rx="4" fill="#cfd4ea"/>
+<rect x="24" y="96" width="38" height="32" rx="3" fill="#fff" stroke="#b9bfe0" stroke-width="2"/><rect x="28" y="84" width="38" height="12" rx="3" fill="#fff" stroke="#b9bfe0" stroke-width="2"/><rect x="22" y="72" width="38" height="12" rx="3" fill="#fff" stroke="#b9bfe0" stroke-width="2"/>
+<rect x="176" y="100" width="40" height="28" rx="3" fill="#fff" stroke="#b9bfe0" stroke-width="2"/><rect x="180" y="86" width="40" height="14" rx="3" fill="#fff" stroke="#b9bfe0" stroke-width="2"/>
+<circle cx="60" cy="36" r="20" fill="#fff" stroke="#e03131" stroke-width="3"/><path d="M60 24v12l9 5" stroke="#e03131" stroke-width="3" fill="none" stroke-linecap="round"/>
+<rect x="96" y="82" width="40" height="46" rx="12" fill="#ff922b"/>
+<circle cx="116" cy="62" r="18" fill="#f4c9a0"/>
+<path d="M98 58c2-16 34-16 36 0l-8-4l-6 4l-6-4z" fill="#222"/>
+<path d="M100 88l-14-30M132 88l14-30" stroke="#ff922b" stroke-width="9" stroke-linecap="round"/>
+<circle cx="84" cy="54" r="6" fill="#f4c9a0"/><circle cx="148" cy="54" r="6" fill="#f4c9a0"/>
+<path d="M109 62l4 3M123 62l-4 3" stroke="#3b3f63" stroke-width="2.5" stroke-linecap="round"/>
+<ellipse cx="116" cy="73" rx="5" ry="3.5" fill="#7a2a2a"/>
+<path d="M88 30l6 8M96 24l4 10M146 30l-6 8" stroke="#e03131" stroke-width="2.5" stroke-linecap="round"/>
+</svg><div class="say">どんだけ時間<br>使ってるねん…</div></div>
+  <h3>データ集めと整理で一日が終わる</h3>
+  <div class="cmp">
+    <div class="row"><span>自分でやると</span><div class="bar"><u class="b" style="width:100%"></u></div><b>約12時間</b></div>
+    <div class="row"><span>お任せすると</span><div class="bar"><u class="a" style="width:10%"></u></div><b>確認のみ 約1時間</b></div>
+  </div>
+  <p class="cn">例：Webの情報500件を集めて表にそろえる場合</p>
+</div><div class="card worry">
+  <div class="scene"><svg viewBox="0 0 240 150" class="ill" aria-hidden="true">
+<rect x="14" y="120" width="212" height="8" rx="4" fill="#cfd4ea"/>
+<rect x="30" y="34" width="96" height="66" rx="8" fill="#fff" stroke="#b9bfe0" stroke-width="3"/>
+<path d="M44 52l20 10l18-8l20 26l14-6" stroke="#e03131" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+<rect x="64" y="100" width="28" height="8" fill="#b9bfe0"/><rect x="50" y="108" width="56" height="6" rx="3" fill="#b9bfe0"/>
+<rect x="156" y="88" width="46" height="34" rx="14" fill="#3b3f63"/>
+<circle cx="180" cy="70" r="19" fill="#e0ac86"/>
+<path d="M160 66c0-20 40-20 40 0c-6-6-12-8-20-8s-14 2-20 8z" fill="#111"/>
+<path d="M166 96l-4 24" stroke="#3b3f63" stroke-width="9" stroke-linecap="round"/>
+<path d="M196 94l-6-16" stroke="#3b3f63" stroke-width="9" stroke-linecap="round"/><circle cx="188" cy="76" r="6" fill="#e0ac86"/>
+<path d="M170 70q3-3 6 0M184 70q3-3 6 0" stroke="#3b3f63" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M174 82q6-4 12 0" stroke="#3b3f63" stroke-width="2" fill="none" stroke-linecap="round"/>
+<path d="M150 56l-8-8M146 70l-10-2" stroke="#e03131" stroke-width="2.5" stroke-linecap="round"/>
+</svg><div class="say">売上、<br>上がらないな…</div></div>
+  <h3>商品ページのミスに気づけない</h3>
+  <div class="cmp">
+    <div class="row"><span>自分でやると</span><div class="bar"><u class="b" style="width:100%"></u></div><b>気づくのは数週間後</b></div>
+    <div class="row"><span>お任せすると</span><div class="bar"><u class="a" style="width:12%"></u></div><b>納品時に洗い出し</b></div>
+  </div>
+  <p class="cn">例：誤字・表記のズレは、売上が落ちてから気づきがち</p>
+</div>
+    </div>
+    <p class="cn center">※時間は作業内容による目安の例です。実際はご依頼内容を見て、無料サンプルのあとにお見積もりします。</p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="eyebrow">SERVICES</div>
+    <h2>サービス</h2>
+    <p class="lead">社内でやると時間ばかりかかる「集める・確かめる・整える」作業を引き受けます。</p>
+    <div class="grid3">
+      <div class="card svc">
+        <div class="vis">
+          <div class="mini"><i></i><b></b><b></b></div>
+          <div class="mini"><i></i><b></b><b></b></div>
+          <div class="mini"><i></i><b></b><b></b></div>
+          <span class="pill">条件に合う企業だけ</span>
+        </div>
+        <h3>営業リスト作成</h3>
+        <p>条件に合う企業を集めて、すぐ使える形で納品。</p>
+        <div class="chips"><span>会社名</span><span>URL</span><span>電話</span><span>フォーム</span></div>
+      </div>
+      <div class="card svc">
+        <div class="vis">
+          <div class="flow"><span>Web</span><em>→</em><span>整理</span><em>→</em><span class="g">表</span></div>
+          <div class="bars"><u style="width:90%"></u><u style="width:65%"></u><u style="width:80%"></u></div>
+        </div>
+        <h3>データ収集・整備</h3>
+        <p>散らばった情報を集めて、表にきれいに整える。</p>
+        <div class="chips"><span>情報収集</span><span>欠損補完</span><span>自動で定期取得</span></div>
+      </div>
+      <div class="card svc">
+        <div class="vis">
+          <div class="page"><div class="pimg mark" data-n="1"></div><div class="pl"></div><div class="pl s mark" data-n="2"></div></div>
+          <span class="pill r">ズレを赤枠で指摘</span>
+        </div>
+        <h3>EC商品ページチェック</h3>
+        <p>誤字・表記ゆれ・モール間の食い違いを見つける。</p>
+        <div class="chips"><span>Amazon</span><span>楽天</span><span>Yahoo!</span><span>自社EC</span></div>
+      </div>
+      <div class="card svc wide">
+        <div class="vis">
+          <div class="chat"><span class="m1">はじめまして。◯◯の件でご連絡しました</span><span class="m2">詳しく聞かせてください</span></div>
+        </div>
+        <div class="wbody">
+          <h3>営業代行（メッセージ送信）</h3>
+          <p>作ったリストをもとに、問い合わせフォーム・メール・SNSのメッセージで最初のご連絡まで代行します。</p>
+          <div class="chips"><span>文面づくり</span><span>フォーム・メール・DM送信</span><span>返信の整理・共有</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="fmt">
+      <div><b>電子データなら、形式はなんでもOK</b><span>ご希望の形で、そのまま使える状態でお渡しします。</span></div>
+      <div class="chips"><span>Excel</span><span>CSV</span><span>Googleスプレッドシート</span><span>PDF</span><span>スクリーンショット画像</span><span>その他の電子データも可</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="results" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">RESULTS</div>
+    <h2>実績</h2>
+    <p class="lead">これまでにお受けしたお仕事の一部です（お客様名は伏せています）。</p>
+    <div class="grid3">
+      <div class="card stat"><div class="num">10,000件</div><div class="label">新規営業向け企業リストの作成・納品</div></div>
+      <div class="card stat"><div class="num">650行</div><div class="label">EC商品ページ（複数モール）の品質チェックを継続受託</div></div>
+      <div class="card stat"><div class="num">4.9</div><div class="label">クラウドソーシングでの評価（5段階）</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="samples">
+  <div class="wrap">
+    <div class="eyebrow">SAMPLES</div>
+    <h2>納品物のサンプル</h2>
+    <p class="lead">これまでの仕事と同じ形式で作った例です。社名・商品名・数値はすべて架空で、実在の企業やお客様とは関係ありません。</p>
+    <span class="badge">架空のサンプルです</span>
+    <div class="sample-grid">
+      <div class="sample">
+        <h3>営業リスト（新規開拓向け）</h3>
+        <p class="note">条件：関東の工務店／従業員10〜50名／問い合わせフォームあり</p>
+        <div class="tbl"><table class="grid">
+          <tr><th>会社名</th><th>所在地</th><th>URL</th><th>電話</th><th>フォーム</th></tr>
+          <tr><td>サンプル工務店A</td><td>埼玉県さいたま市</td><td>example.com/a</td><td>048-000-0000</td><td class="ok">あり</td></tr>
+          <tr><td>サンプル建築B</td><td>千葉県船橋市</td><td>example.com/b</td><td>047-000-0000</td><td class="ok">あり</td></tr>
+          <tr><td>サンプルホームC</td><td>神奈川県横浜市</td><td>example.com/c</td><td>045-000-0000</td><td class="ok">あり</td></tr>
+          <tr><td>サンプル住建D</td><td>東京都八王子市</td><td>example.com/d</td><td>042-000-0000</td><td class="ok">あり</td></tr>
+        </table></div>
+      </div>
+      <div class="sample">
+        <h3>EC商品ページチェック</h3>
+        <p class="note">対象：複数モールの商品ページ／テキストと画像を確認</p>
+        <div class="tbl"><table>
+          <tr><th>商品</th><th>モール</th><th>指摘内容</th><th>状態</th></tr>
+          <tr><td>サンプル商品1</td><td>A店</td><td>容量表記が他モールと不一致（250ml／300ml）</td><td class="ng">要修正</td></tr>
+          <tr><td>サンプル商品2</td><td>B店</td><td>説明文に誤字「保証期簡」</td><td class="ng">要修正</td></tr>
+          <tr><td>サンプル商品3</td><td>C店</td><td>画像の注意書きと本文が一致</td><td class="ok">問題なし</td></tr>
+          <tr><td>サンプル商品4</td><td>A店</td><td>価格の税込・税抜表記が混在</td><td class="ng">要修正</td></tr>
+        </table></div>
+        <div class="shot">
+          <div class="img mark" data-n="3">商品画像</div>
+          <div class="t"><b>サンプル商品1　<span class="mark" data-n="1">容量 250ml</span></b>
+            ご家庭で毎日使える<span class="mark" data-n="2">保証期簡</span>つきの定番アイテムです。
+          </div>
+        </div>
+        <p class="legend"><span>赤枠</span>で指摘箇所を示してお渡しします。①他モールと容量が不一致　②誤字　③画像内の注記と本文が不一致</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">WHY US</div>
+    <h2>選ばれる理由</h2>
+    <p class="lead">早さと正確さを両立するための仕組みを持っています。</p>
+    <div class="why">
+      <div class="card"><div class="ic">01</div><div><h3>AI＋人の二重確認</h3><p>収集と一次チェックはAIで高速に、最終確認は人が行います。速さと品質を両立します。</p></div></div>
+      <div class="card"><div class="ic">02</div><div><h3>まず10件、無料で</h3><p>本番の前に無料サンプルで形式と品質をご確認いただけます。合わなければそこで終わりで構いません。</p></div></div>
+      <div class="card"><div class="ic">03</div><div><h3>1件いくらの明朗な料金</h3><p>時間ではなく件数・行数でお見積もりします。月ごとの定額継続にも対応します。</p></div></div>
+      <div class="card"><div class="ic">04</div><div><h3>大量でも対応</h3><p>数千件・数千行の規模でも、納期と件数を決めて計画的に進めます。</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="flow" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">FLOW</div>
+    <h2>ご依頼の流れ</h2>
+    <p class="lead">最短でその日のうちに無料サンプルの作業に入れます。</p>
+    <div class="steps">
+      <div class="step"><h3>お問い合わせ</h3><p>集めたい情報・確認したいページと、おおよその量をお知らせください。</p></div>
+      <div class="step"><h3>無料サンプル</h3><p>10件を実際に作業してお送りします。形式や項目はここで調整します。</p></div>
+      <div class="step"><h3>お見積もり</h3><p>件数・行数あたりの単価でお見積もりします。月額の定額も可能です。</p></div>
+      <div class="step"><h3>本番・継続</h3><p>納期に合わせて納品します。継続のご依頼は毎月同じ品質でお届けします。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">ABOUT</div>
+    <h2>事業者概要</h2>
+    <dl class="about">
+      <dt>屋号</dt><dd>Kasane Works<span class="tbd">仮</span></dd>
+      <dt>代表</dt><dd>（未定）<span class="tbd">要決定</span></dd>
+      <dt>開業</dt><dd>2026年7月</dd>
+      <dt>事業内容</dt><dd>営業リスト作成／データ収集・整備／EC商品ページ品質チェック／メッセージでの営業代行</dd>
+      <dt>お問い合わせ</dt><dd><a href="#contact">お問い合わせ欄から</a></dd>
+    </dl>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="eyebrow">CONTACT</div>
+    <h2>まずは無料サンプルから</h2>
+    <p class="lead">「こんな情報を集めたい」「この商品ページを見てほしい」だけで構いません。2営業日以内にお返事します。</p>
+    <form class="cform" id="cform" action="https://formsubmit.co/ajax/CONTACT_EMAIL" method="POST">
+      <input type="hidden" name="_subject" value="【サイト】お問い合わせが届きました">
+      <input type="hidden" name="_template" value="table">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+      <div class="f2">
+        <label>会社名<input name="会社名" autocomplete="organization"></label>
+        <label><span>お名前<b>必須</b></span><input name="お名前" required autocomplete="name"></label>
+      </div>
+      <label><span>メールアドレス<b>必須</b></span><input type="email" name="email" required autocomplete="email"></label>
+      <fieldset><legend>ご相談の内容<b>必須</b></legend>
+        <label class="ck"><input type="checkbox" name="内容" value="営業リスト作成">営業リスト作成</label>
+        <label class="ck"><input type="checkbox" name="内容" value="データ収集・整備">データ収集・整備</label>
+        <label class="ck"><input type="checkbox" name="内容" value="EC商品ページチェック">EC商品ページチェック</label>
+        <label class="ck"><input type="checkbox" name="内容" value="営業代行">営業代行</label>
+        <label class="ck"><input type="checkbox" name="内容" value="その他">その他</label>
+      </fieldset>
+      <label><span>詳しい内容<b>必須</b></span><textarea name="詳細" rows="5" required placeholder="例：関東の工務店を300社、会社名・電話・問い合わせフォームURLで集めてほしい"></textarea></label>
+      <button class="btn" type="submit">送信する</button>
+      <p class="fmsg" id="fmsg" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Kasane Works　営業リスト作成・データ整備・EC商品ページチェック</div>
+    <div>© 2026 Kasane Works</div>
+  </div>
+</footer>
+
+<script>
+(()=>{
+  document.querySelectorAll('.big .ln').forEach((ln,i)=>{
+    const t=ln.textContent;ln.textContent='';
+    [...t].forEach((c,j)=>{const sp=document.createElement('span');sp.textContent=c;sp.style.animationDelay=(i*.18+j*.05)+'s';ln.appendChild(sp)});
+  });
+  const els=document.querySelectorAll('section h2,section .lead,.card,.step,.sample,.fmt,.eyebrow,.about');
+  els.forEach(e=>e.classList.add('rv'));
+  const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('in',e.isIntersecting)),{threshold:.12});
+  els.forEach((e,i)=>{e.style.transitionDelay=((i%3)*.12)+'s';io.observe(e)});
+  document.querySelectorAll('.num').forEach(n=>{
+    const m=n.textContent.match(/^([\d,.]+)(.*)$/);if(!m)return;
+    const end=parseFloat(m[1].replace(/,/g,'')),dec=(m[1].split('.')[1]||'').length,suf=m[2];
+    const o=new IntersectionObserver(es=>{if(!es[0].isIntersecting){n.textContent='0'+suf;return}const t0=performance.now();
+      const f=t=>{const p=Math.min((t-t0)/1400,1),v=end*(1-Math.pow(1-p,3));n.textContent=(dec?v.toFixed(dec):Math.round(v).toLocaleString())+suf;if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)});
+    o.observe(n);
+  });
+  const hero=document.querySelector('.hero2');
+  new IntersectionObserver(es=>{if(es[0].isIntersecting)return;document.querySelectorAll('.big .ln>span,.hero2-txt').forEach(x=>{x.style.animation='none'})},{threshold:0}).observe(hero);
+  new IntersectionObserver(es=>{if(!es[0].isIntersecting)return;document.querySelectorAll('.big .ln>span,.hero2-txt').forEach(x=>{void x.offsetWidth;x.style.animation=''})},{threshold:.5}).observe(hero);
+  const polys=document.querySelectorAll('.poly'),hd=document.querySelector('header');
+  addEventListener('scroll',()=>{const y=scrollY;polys.forEach(p=>p.style.transform='translateY('+(y*p.dataset.speed)+'px)');hd.classList.toggle('solid',y>40);document.body.classList.toggle('scrolled',y>40)},{passive:true});
+})();
+</script>
+<script>
+(()=>{const f=document.getElementById('cform'),m=document.getElementById('fmsg');
+f.addEventListener('submit',async e=>{e.preventDefault();
+ if(!f.querySelector('input[name="内容"]:checked')){m.textContent='ご相談の内容を1つ以上選んでください。';return}
+ if(f.action.includes('CONTACT_EMAIL')){m.textContent='準備中です。お手数ですがしばらくしてからお試しください。';return}
+ m.textContent='送信しています…';
+ try{const r=await fetch(f.action,{method:'POST',body:new FormData(f),headers:{Accept:'application/json'}});
+  if(r.ok){f.reset();m.textContent='送信しました。2営業日以内にお返事します。'}else throw 0}
+ catch{m.textContent='送信できませんでした。時間をおいて再度お試しください。'}});})();
+</script>
+</body>
+</html>
